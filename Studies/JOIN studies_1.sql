@@ -29,7 +29,8 @@ VALUES
     (3, 2, '1996-07-06'),
     (4, 4, '1996-07-07'),
     (5, 5, '1996-07-08'),
-    (6, 5, '1996-07-09')
+    (6, 5, '1996-07-09'),
+    (7, 4, '2000-07-04')
     ;
 
 CREATE TABLE qq.Products (
@@ -85,7 +86,10 @@ VALUES
     (7, 4, 5, 2),
     (8, 5, 5, 5),
     (9, 5, 1, 10),
-    (10, 5, 2, 5);
+    (10, 5, 2, 5),
+    (11, 7, 1, 10),
+    (12, 7, 5, 10);
+    
 
 
 -- 1. Quais são os nomes dos clientes que fizeram um pedido?
@@ -137,18 +141,18 @@ where orders.orderdate > '1996-07-06';
 
 -- 5. Para cada pedido feito por clientes do 'Mexico', qual é o nome do cliente, a data do pedido e o nome do produto?
 select
-	orders.CustomerID
-    , customers.customername
-    , orders.OrderDate
-    , products.productname
+		orders.orderid
+        , customers.country
+        , Customers.CustomerName
+        , orders.OrderDate
+        , products.ProductName
 from qq.orders
-
 left join qq.customers
 on orders.customerid = customers.customerid
-
+inner join qq.orderdetails
+on orders.orderid = orderdetails.orderid
 left join qq.products
-on orders.customerid = products.
-FALTA TERMINAR
+on orderdetails.productid = products.productid
 ;
 
 
@@ -188,8 +192,40 @@ select
     , customername
     , sum(total)
 from a
-group by customerid
+group by customerid;
 
 
 
 -- 8. Quais fornecedores fornecem produtos para pedidos feitos por clientes no 'UK'?
+select
+	distinct suppliers.SupplierName
+from qq.orders
+
+left join qq.customers
+on orders.customerid = customers.customerid
+
+left join qq.orderdetails
+on orders.orderid = orderdetails.orderid
+
+inner join qq.products
+on orderdetails.productid = products.productid
+
+left join qq.suppliers
+on products.supplierid = suppliers.supplierid
+
+where customers.country = 'UK';
+
+-- 9. Quanto cada cliente gastou?
+
+select
+	distinct customers.customername
+    , sum(orderdetails.Quantity * products.price) as total_NR
+from qq.orders
+left join qq.customers
+on orders.customerid = customers.customerid
+left join qq.orderdetails
+on orders.orderid = orderdetails.orderid
+left join qq.products
+on orderdetails.productid = products.productid
+group by 1
+order by 1
