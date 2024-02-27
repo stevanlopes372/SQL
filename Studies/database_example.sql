@@ -33,6 +33,7 @@ VALUES
     (7, 4, '2000-07-04')
     ;
 
+
 CREATE TABLE qq.Products (
     ProductID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     ProductName varchar(255),
@@ -135,3 +136,32 @@ VALUES
     (6, 'Michael', 'Miller', 2),
     (7, 'Sarah', 'Wilson', 3),
     (8, 'David', 'Moore', 4);
+
+
+CREATE TABLE qq.random_numbers(
+rdn_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+number double(16,7)
+);
+
+INSERT INTO qq.random_numbers(number)
+VALUES
+	( rand() * 1000000000 );
+
+
+CREATE TABLE qq.customer_address(
+ca_id int not null auto_increment primary key,
+customer_id varchar(50),
+address varchar(50),
+city varchar(50),
+country varchar(50)
+);
+
+-- item ca_id=6 duplicado propositalmente
+insert into qq.customer_address (ca_id, customer_id, address, country, city)
+values
+	(1, 1, 'Rua João Felipe, 555', 'Berlin', 'Germany'),
+	(2, 2, 'Rua Marquês de Sapucaí, 222', 'Mexico', 'Mexico D.F.'),
+	(3, 3, 'Avenida Coisa Nehuma da Silva, 15', 'Mexico', 'Mexico D.F.'),
+	(4, 4, 'Rua Benjamim Constant, 57', 'UK', 'London'),
+	(5, 5, 'Rua da Conceição, 1522', 'Sweden',  'Luleå'),
+    (6, 1, 'Rua João Felipe, 555', 'Berlin', 'Germany')
