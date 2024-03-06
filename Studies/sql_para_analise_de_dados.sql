@@ -94,4 +94,16 @@ select customer_id, address, city, country, count(*) as records
 from qq.customer_address
 group by 1,2,3,4
 having records > 1
-) a
+) a;
+
+
+-- Windows Function
+-- sobre o total vendido
+SELECT 
+	*
+	, sum(total) over(partition by productname) as total_por_produto
+	, sum(total) over() as total_geral
+    , (sum(total) over(partition by productname) / sum(total) over())*100 as participação_por_produto
+    , (sum(total) over(partition by orderID) / sum(total) over())*100 as participação_por_order
+from produtos_vendidos
+;
