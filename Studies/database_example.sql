@@ -164,4 +164,20 @@ values
 	(3, 3, 'Avenida Coisa Nehuma da Silva, 15', 'Mexico', 'Mexico D.F.'),
 	(4, 4, 'Rua Benjamim Constant, 57', 'UK', 'London'),
 	(5, 5, 'Rua da Conceição, 1522', 'Sweden',  'Luleå'),
-    (6, 1, 'Rua João Felipe, 555', 'Berlin', 'Germany')
+    (6, 1, 'Rua João Felipe, 555', 'Berlin', 'Germany');
+
+
+
+-- view para produtos vendidos
+create or replace view produtos_vendidos as
+SELECT
+	od.OrderID
+    , od.ProductID
+    , p.ProductName
+    , od.Quantity
+    , p.Unit
+    , p.price
+    , od.Quantity * p.Price as total
+FROM qq.orderdetails as od
+left join qq.products as p
+on p.ProductID = od.ProductID
