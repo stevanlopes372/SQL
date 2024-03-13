@@ -1,8 +1,13 @@
--- Estudos baseados no livro 'SQL para Análise de Dados' de Cathy Tanimura
--- A base de dados usado nesse estudo pode ser encontrado no arquivo 'database example.sql'
+/*markdown
+Estudos baseados no livro 'SQL para Análise de Dados' de Cathy Tanimura <br>
+A base de dados usado nesse estudo pode ser encontrado no arquivo 'database example.sql' <br>
+Estudo feito usando VS Code + extensão SQL Notebook (https://marketplace.visualstudio.com/items?itemName=cmoog.sqlnotebook) 
+*/
 
--- Discretização (Binning)
--- Binning na coluna Price da tabela products
+/*markdown
+# Discretização (Binning)
+Binning na coluna Price da tabela products
+*/
 
 -- etapa 1 - entendendo os dados
 SELECT 
